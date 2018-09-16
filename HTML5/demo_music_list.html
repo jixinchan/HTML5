@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<script>
+		window.onload=function(){
+			var lis = document.getElementsByClassName("play");
+			var aud = document.getElementById("aud");
+			var path;
+			for(i=0;i<lis.length;i++){
+				lis[i].onclick=function(){
+					path = this.previousElementSibling.innerHTML;
+					aud.src+=path;
+					aud.src+=".mp3";
+					console.log(aud.src);
+				}
+			}
+		}
+	</script>
+	<style>
+		
+	</style>
+	<head>
+		<meta charset="utf-8" />
+		<title>音乐播放器</title>
+	</head>
+	<body>
+		<nav>
+			<a></a>
+			<a></a>
+		</nav>
+		<ul>
+			<li>
+				<p>后来</p><a href="#" class="play">播放</a>
+			</li>
+			<li>
+				<p>童话镇</p><a href="#" class="play">播放</a>
+			</li>
+		</ul>
+		<audio id="aud" src="img/" controls="controls"></audio>
+	</body>
+</html>

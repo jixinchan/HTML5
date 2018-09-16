@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="icon" href="img\snowflake.ico" />
+		<title>Personal information</title>
+		<style>
+			input{
+				height:20px;
+				width: 200px;
+				margin: 2px;
+			}
+			fieldset{
+				width: 530px;
+			}
+			legend{
+				color: red;
+				font-size: 18px;
+			}
+			font{
+				color: red;
+				font-weight: bolder;
+			}
+			#ediv{
+				  margin-left:36px;
+				  overflow:auto; 
+				  display:none;
+				  width:200px;
+				  border:1px solid #aaa;
+				  background: #fff;
+				  max-height:100px;
+				  line-height:20px;
+			}
+			p:hover{
+				background: greenyellow;
+			}
+		</style>
+		<script >
+			window.onload=function(){
+				var ediv = document.getElementById("ediv");
+				ediv.onclick = function(e){
+					var target = e.target;
+					inp.value = inp.value.replace(/@.*/,target.innerHTML);
+				}
+			}
+			var mails = "@qq.com @163.com @sina.com @sina.cn @126.com @sohu.com";
+			function fun(val){
+				if(!val.match(/^[\w]+@\w*\.?\w*/)) return 0;
+			val = val.match(/@\w*\.?\w*/);
+				var nexp = new RegExp(val+'[^ ]*','gm');
+				var rmail = mails.match(nexp);
+				if(rmail){
+					ediv.innerHTML = "";
+					ediv.style.display="block";
+					for(var i=0;i<rmail.length;i++){
+						ediv.innerHTML+="<p>"+rmail[i]+"</p>";
+					}
+				}
+			}
+			document.onclick = function(e){
+				var target = e.target;
+    			if (target.id != "inp")
+      				ediv.style.display = "none"; 
+			}			
+		</script>
+	</head>
+	<body>
+		<header><h1>请填写个人信息</h1></header>
+		<form>
+		<fieldset>
+			<legend>基本信息</legend>
+				姓名<input type="text" placeholder="请输入姓名" name="username" required="required"/><font>*</font><br />
+				年龄<input type="number" name="age" min="1" max="120" value="20"/>
+		</fieldset>
+		
+		<fieldset>
+			<legend>你想在哪里收到邮件？</legend>
+			邮箱<input type="email" placeholder="请输入邮箱" name="username" required="required" onkeyup="fun(this.value)" id="inp"/><font>*</font>
+			<div id="ediv">
+				<p id="n1">请选择邮箱类型</p>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>收入情况</legend>
+				月收入
+				<select id="salays">
+					<option>5k</option>
+					<option>7k</option>
+					<option>10k</option>
+					<option>15k</option>
+					<option>20k+</option>
+				</select><br />
+				银行卡<input type="text" name="card"/>
+				有效期<input type="date" name="Date" placeholder="年/月/日"/>
+		</fieldset>
+		<fieldset>
+			<legend>选取提交文件</legend>
+				文件<input type="file" />
+		</fieldset>
+		<input type="submit" name="sub" />
+		</form>
+	</body>
+</html>
