@@ -5,18 +5,44 @@
 			var lis = document.getElementsByClassName("play");
 			var aud = document.getElementById("aud");
 			var path;
-			for(i=0;i<lis.length;i++){
+			for(var i=0;i<lis.length;i++){
 				lis[i].onclick=function(){
-					path = this.previousElementSibling.innerHTML;
-					aud.src+=path;
-					aud.src+=".mp3";
-					console.log(aud.src);
+					var q=1;
+					if(this.innerHTML=="播放"&&q){
+						this.innerHTML="暂停";
+						path = this.previousElementSibling.innerHTML;
+						aud.src="img/";
+						aud.src+=path;
+						aud.src+=".mp3";
+						aud.play();
+						q=0;
+					}
+					if(this.innerHTML=="暂停"&&q){
+						this.innerHTML="播放";
+						aud.pause();
+					}
 				}
 			}
 		}
 	</script>
 	<style>
-		
+		body{
+			width: 400px;
+		}
+		li{
+			width: 400px;
+			float: left;
+		}
+		.play{
+			position: relative;
+			left:180px;
+		}
+		.play1{
+			width: 170px;
+			height: px;
+			float: left;
+			margin-left: 20px;
+		}
 	</style>
 	<head>
 		<meta charset="utf-8" />
@@ -24,15 +50,15 @@
 	</head>
 	<body>
 		<nav>
-			<a></a>
-			<a></a>
+			<a href="#"><p class="play1">本地音乐</p></a>
+			<a href="#"><p class="play1">在线音乐</p></a>
 		</nav>
 		<ul>
 			<li>
-				<p>后来</p><a href="#" class="play">播放</a>
+				<span>后来</span><a href="#" class="play">播放</a>
 			</li>
 			<li>
-				<p>童话镇</p><a href="#" class="play">播放</a>
+				<span>童话镇</span><a href="#" class="play">播放</a>
 			</li>
 		</ul>
 		<audio id="aud" src="img/" controls="controls"></audio>
