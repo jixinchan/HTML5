@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>页面换肤(localStorage)</title>
+		<link rel="icon" href="img\snowflake.ico" />
+		<style>
+			fieldset{
+				width: 600px;
+			}
+			h2{
+				color: red;
+			}
+			#outdiv{
+				border:solid cornflowerblue 1px;
+				width: 570px;
+				height:40px;
+				margin-left: 15px;
+				margin-right: 15px;
+			}
+			p{
+				width: 26px;
+				height: 26px;
+				margin: 7px;
+				float: left;
+				position: relative;
+			}
+			#gray{
+				background: gainsboro;
+			}
+			#purple{
+				background: mediumpurple;
+			}
+			#red{
+				background: red;
+			}
+			#blue{
+				background: deepskyblue;
+			}
+			#orange{
+				background: orange;
+			}
+			#green{
+				background: limegreen;
+			}
+			#tips{
+				margin: 18px;
+				width: 564px;
+				height: 60px;
+			}
+		</style>
+	</head>
+	<body>
+		<fieldset>
+			<legend><h2>页面换肤</h2></legend>
+			<div id="outdiv">
+				<p id="gray"></p>
+				<p id="purple"></p>
+				<p id="red"></p>
+				<p id="blue"></p>
+				<p id="orange"></p>
+				<p id="green"></p>
+			</div>
+			<div id="tips">我的颜色会变哦！</div>
+		</fieldset>
+		<script>
+			window.onload = function(){
+				function getE(id){
+					return document.getElementById(id);
+				}
+				var node = getE('gray'),tips = getE('tips');
+				var color = window.getComputedStyle(node,null).background;
+				if(window.localStorage){
+					if(localStorage.getItem('color')){
+						tips.style.background = localStorage.getItem('color');	
+					}else{
+						localStorage.setItem('color',color);
+						tips.style.background = localStorage.getItem('color');
+					}
+				}
+				var arr = ['gray','purple','red','blue','orange','green'];
+				for(let i of arr){
+					getE(i).onclick = function(){
+						for(let j of arr){
+							getE(j).style.bottom = '0px';
+						}
+						this.style.bottom = '5px';
+						if(window.localStorage){
+							color = window.getComputedStyle(this,null).background;
+							localStorage.setItem('color',color);
+							tips.style.background = localStorage.getItem('color');
+						}
+					}
+				}
+			}
+			
+		</script>
+	</body>
+</html>
