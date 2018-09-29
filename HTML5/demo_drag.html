@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				height:300px;
+				width:300px;
+				border:solid 1px;
+			}
+		</style>
+	</head>
+	<body>
+	<p>上传头像</p>
+	<div id="area">
+		<img src='' id="pic"/> 
+	</div>
+	</body>
+	<script type="text/javascript">
+		document.ondragover = function(e){
+			e.preventDefault();
+		}
+		document.ondrop = function(e){
+			e.preventDefault();
+		}
+		var area = document.getElementById('area');
+		area.ondragover = function(e){
+			e.preventDefault();
+		}
+		area.ondrop = function drop(e){
+			var data = e.dataTransfer.files;
+			var reader = new FileReader();
+			reader.readAsDataURL(data[0]);
+			reader.onload=function(){
+				var pic = document.getElementById('pic');
+				pic.src = this.result;
+			}
+		}
+	</script>
+</html>
