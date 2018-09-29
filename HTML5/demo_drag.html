@@ -18,30 +18,33 @@
 	</div>
 	</body>
 	<script type="text/javascript">
-		document.ondragover = function(e){
-			e.preventDefault();
-		}
-		document.ondragenter = function(e){
-			e.preventDefault();
-		}
-		document.ondragend = function(e){
-			e.preventDefault();
-		}
-		document.ondrop = function(e){
-			e.preventDefault();
-		}
-		var area = document.getElementById('area');
-		area.ondragover = function(e){
-			e.preventDefault();
-		}
-		area.ondrop = function drop(e){
-			var data = e.dataTransfer.files;
-			var reader = new FileReader();
-			reader.readAsDataURL(data[0]);
-			reader.onload=function(){
-				var pic = document.getElementById('pic');
-				pic.src = this.result;
+		window.onload = function(){
+			document.ondragover = function(e){
+				e.preventDefault();
+			}
+			document.ondragenter = function(e){
+				e.preventDefault();
+			}
+			document.ondragend = function(e){
+				e.preventDefault();
+			}
+			document.ondrop = function(e){
+				e.preventDefault();
+			}
+			var area = document.getElementById('area');
+			area.ondragover = function(e){
+				e.preventDefault();
+			}
+			area.ondrop = function drop(e){
+				var data = e.dataTransfer.files;
+				var reader = new FileReader();
+				reader.readAsDataURL(data[0]);
+				reader.onload=function(){
+					var pic = document.getElementById('pic');
+					pic.src = this.result;
+				}
 			}
 		}
+		
 	</script>
 </html>
