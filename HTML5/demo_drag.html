@@ -29,7 +29,7 @@
 			e.preventDefault();
 		}
 		area.ondrop = function drop(e){
-			var data = e.dataTransfer.files;
+			var data = e.datatransfer.files;
 			var reader = new FileReader();
 			reader.readAsDataURL(data[0]);
 			reader.onload=function(){
