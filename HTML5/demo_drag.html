@@ -21,6 +21,12 @@
 		document.ondragover = function(e){
 			e.preventDefault();
 		}
+		document.ondragenter = function(e){
+			e.preventDefault();
+		}
+		document.ondragend = function(e){
+			e.preventDefault();
+		}
 		document.ondrop = function(e){
 			e.preventDefault();
 		}
@@ -29,7 +35,7 @@
 			e.preventDefault();
 		}
 		area.ondrop = function drop(e){
-			var data = e.datatransfer.files;
+			var data = e.dataTransfer.files;
 			var reader = new FileReader();
 			reader.readAsDataURL(data[0]);
 			reader.onload=function(){
