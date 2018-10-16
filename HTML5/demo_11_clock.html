@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>clock</title>
+		<style>
+			#clock{
+				border: 2px solid seagreen;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="clock" width="600px" height="600px">
+			
+		</canvas>
+		<script>
+			var clock = document.getElementById('clock');
+			var cxt = clock.getContext('2d');
+			function drawOthers(){
+				cxt.save();
+				cxt.arc(300,300,250,0,2*Math.PI);
+				cxt.strokeStyle = 'seagreen';
+				cxt.lineWidth = 5;
+				cxt.stroke();
+				cxt.beginPath();
+				cxt.arc(300,300,10,0,2*Math.PI);
+				cxt.stroke();
+				//写数字
+				for(var i=1;i<13;i++){
+					var n = i+'';
+					cxt.font="18px 隶书"
+					cxt.fillText(n,Math.sin((i*30)/180*Math.PI)*206+296,
+					-Math.cos((i*30)/180*Math.PI)*206+304);
+				}
+				
+				//第一圈
+				cxt.beginPath();
+				cxt.translate(300,300);
+	        	cxt.fillRect(220, 0, 20, 5);
+				for(var i=0;i<60;i++){
+					cxt.beginPath();
+					cxt.rotate(6/180*Math.PI);
+					cxt.fillRect(220, 0, 20, 5);
+				}
+				
+				//第二圈
+				cxt.beginPath();
+				cxt.fillStyle = 'red';
+	        	cxt.fillRect(220, 0, 25, 5);
+				for(var i=0;i<12;i++){
+					cxt.beginPath();
+					cxt.rotate(30/180*Math.PI);
+					cxt.fillRect(220, 0, 25, 5);
+				}
+				cxt.restore();
+			}
+			function drawSeconds(s){
+				cxt.save();
+				cxt.translate(300,300);
+				var rad = s*6/180*Math.PI-0.5*Math.PI;
+//				console.log(s);
+				cxt.rotate(rad);
+				cxt.beginPath();
+				cxt.fill();
+				cxt.fillStyle = 'yellow';
+				cxt.fillRect(-2,-2,150,4);
+				
+				cxt.restore();
+			}
+			function drawMinutes(m,s){
+				cxt.save();
+				cxt.translate(300,300);
+				var rad = m*6/180*Math.PI+
+				          s*0.1/180*Math.PI-0.5*Math.PI;
+				cxt.rotate(rad);
+				cxt.beginPath();
+				cxt.fillStyle = 'slateblue';
+				cxt.fillRect(-3,-3,135,6);
+				cxt.restore();
+			}
+			function drawHours(h,m){
+				cxt.save();
+				cxt.translate(300,300);
+//				console.log(h);
+				var rad = h*30/180*Math.PI +
+				          m*0.5/180*Math.PI-0.5*Math.PI;
+				cxt.rotate(rad);
+				cxt.beginPath();
+				cxt.fillStyle = 'brown';
+				cxt.fillRect(-5,-5,110,10);
+				cxt.restore();
+			}
+			
+			
+			//动起来
+			
+			var flag = true;
+			setInterval(function(){
+				var date = new Date();
+				var s = date.getSeconds();
+				var m = date.getMinutes();
+				var h = date.getHours();
+				cxt.restore();
+				cxt.clearRect(0,0,600,600);
+				drawOthers();
+				drawSeconds(s);
+				drawHours(h,m);
+				drawMinutes(m,s);
+			},1000);
+		</script>
+	</body>
+</html>
